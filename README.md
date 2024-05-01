@@ -1,1 +1,3 @@
-This is A Chatbot Using Python
+# Project
+## Chatbot
+- This project features a Chatbot using Python.
