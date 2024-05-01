@@ -1,26 +1,27 @@
-from openai import OpenAI
+import openai
+# Set your OpenAI API key
+api_key = &#39;sk-proj-J89Zs4YKmykEE1Mt1w7LT3BlbkFJSyokIKU&#39;
+openai.api_key = api_key
+# Define the function to interact with GPT-3
+def ask_gpt(prompt):
+    response = openai.Completion.create(
+        engine=&quot;text-davinci-003&quot;,
+        prompt=prompt,
+        temperature=0.7,
+        max_tokens=100
+    )
+    return response.choices[0].text.strip()
+# Main function to handle the conversation
+def chat():
+    print(&quot;Jarvis: Hello! How can I help you?&quot;)
+    while True:
+        user_input = input(&quot;user: &quot;).strip()
+        if user_input.lower() == &quot;exit&quot;:
+            print(&quot;Chatbot: Goodbye!&quot;)
+            break
+        response = ask_gpt(&quot;You: &quot; + user_input + &quot;\nChatbot:&quot;)
+        print(&quot;Chatbot:&quot;, response)
+# Start the conversation
 
-client = OpenAI(
-    # defaults to os.environ.get("OPENAI_API_KEY")
-    api_key="sk-replace-with-your-own-key",
-)
-def display_chat_history(messages):
-    for message in messages:
-        print(f"{message['role'].capitalize()}: {message['content']}")
-def get_assistant_response(messages):
-    r = client.chat.completions.create(
-        model="gpt-3.5-turbo",
-        messages=[{"role": m["role"], "content": m["content"]} for m in messages],
-    )
-    response = r.choices[0].message.content
-    return response
-messages = [{"role": "assistant", "content": "How can I help?"}]
-
-while True:
-    display_chat_history(messages)
-
-    user_input = input("User: ")
-    messages.append({"role": "user", "content": user_input})
-
-    assistant_response = get_assistant_response(messages)
-    messages.append({"role": "assistant", "content": assistant_response})
+if __name__ == &quot;__main__&quot;:
+    chat()
