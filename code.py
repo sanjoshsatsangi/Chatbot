@@ -1,6 +1,6 @@
 import openai
 # Set your OpenAI API key
-api_key = &#39;sk-proj-J89Zs4YKmykEE1Mt1w7LT3BlbkFJSyokIKU&#39;
+api_key = "sk-openaiapikey";
 openai.api_key = api_key
 # Define the function to interact with GPT-3
 def ask_gpt(prompt):
